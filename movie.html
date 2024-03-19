@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movies App</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body> 
+    <h1>Movies App!</h1>
+  <form action="" class="main-form">
+    <input type="text" placeholder="Put the title of movie"></input> 
+    <br>
+    <input type="range" min="1" max="5" step="1" value="1"></input> 
+    <p>Rating: <output id="value"></output></p>
+    <br>
+    <button id="submitBtn">Submit</button>
+  </form>
+</body>
+<style>
+  body{
+    text-align: center;
+    justify-content: center;
+  }
+  form{
+    border: 4px solid purple;
+    width:40%;
+    margin:0 auto;
+  }
+  input{
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width:200px;
+  }
+</style>
+<script>
+  
+  //Input Button
+  $('input').eq(1).on('change',function(e){
+    value.textContent= $(e.target).val();
+  })
+
+//submit Button 
+  $('#submitBtn').on('click',function(e){
+   //Prevent Default
+    e.preventDefault();
+   
+    // Creat Li with value from Inputs
+    $('body').append($('<li>',
+      {text:'Title: '+ $('input').eq(0).val() +
+      '      ,Rating:'+$('input').eq(1).val()}));
+   $('li:last-child').append(" <button id=removeBtn>Remove</button> ")
+    
+   //reset( clear the input value)
+    $('form').trigger("reset");
+   //reset the value of the output
+    value.textContent="";
+  })
+
+  //Remove Button
+  $(document).on("click","#removeBtn",function(e){
+    console.log($(e.target).parent().remove())
+  })
+
+    // $('removeBtn').live('click',function(e){
+    //   console.log(e.target)
+    // })
+
+
+</script>
+</html>
